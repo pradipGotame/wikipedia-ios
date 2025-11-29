@@ -2671,6 +2671,14 @@
 		D8FAC7DD1D6F88AB00C2A6BC /* WMF.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D844D96C1D6CB2600042D692 /* WMF.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8FEECCD1DE3729400B883F0 /* WMFChange.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FEECCC1DE3729400B883F0 /* WMFChange.m */; };
 		E1CFD6E6210C103900D8E37C /* ExploreCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CA612920D1675800EF0C4A /* ExploreCardViewController.swift */; };
+		E23A001E2EDB6E5E00B98616 /* WikipediaDeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A001D2EDB6E5B00B98616 /* WikipediaDeepLinkHandler.swift */; };
+		E23A001F2EDB6E5E00B98616 /* WikipediaDeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A001D2EDB6E5B00B98616 /* WikipediaDeepLinkHandler.swift */; };
+		E23A00202EDB6E5E00B98616 /* WikipediaDeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A001D2EDB6E5B00B98616 /* WikipediaDeepLinkHandler.swift */; };
+		E23A00222EDB6E7B00B98616 /* DeepLinkEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A00212EDB6E7A00B98616 /* DeepLinkEventHandler.swift */; };
+		E23A00232EDB6E7B00B98616 /* DeepLinkEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A00212EDB6E7A00B98616 /* DeepLinkEventHandler.swift */; };
+		E23A00242EDB6E7B00B98616 /* DeepLinkEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A00212EDB6E7A00B98616 /* DeepLinkEventHandler.swift */; };
+		E23A00282EDB74D600B98616 /* WikipediaDeepLinkHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A00272EDB74D600B98616 /* WikipediaDeepLinkHandlerTest.swift */; };
+		E23A00312EDB9F6200B98616 /* DeepLinkEventHandlerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A00302EDB9F6200B98616 /* DeepLinkEventHandlerTest.swift */; };
 		EB8237532970AE6A00FD629E /* WMFItemSourceExcludingActivityTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8237522970AE6A00FD629E /* WMFItemSourceExcludingActivityTypes.swift */; };
 		FF2090F02500247100849774 /* ThreeLineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2090EE2500247100849774 /* ThreeLineHeaderView.swift */; };
 		FF5555642771388F00925099 /* CollectionViewContextMenuShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5555632771388F00925099 /* CollectionViewContextMenuShowing.swift */; };
@@ -4702,6 +4710,10 @@
 		D8FFF6922031CB3D00A028E0 /* my */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = my; path = my.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		D8FFF6932031CB3E00A028E0 /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = cy; path = cy.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		D8FFF6942031CB4000A028E0 /* tcy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = tcy; path = tcy.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		E23A001D2EDB6E5B00B98616 /* WikipediaDeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaDeepLinkHandler.swift; sourceTree = "<group>"; };
+		E23A00212EDB6E7A00B98616 /* DeepLinkEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkEventHandler.swift; sourceTree = "<group>"; };
+		E23A00272EDB74D600B98616 /* WikipediaDeepLinkHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaDeepLinkHandlerTest.swift; sourceTree = "<group>"; };
+		E23A00302EDB9F6200B98616 /* DeepLinkEventHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkEventHandlerTest.swift; sourceTree = "<group>"; };
 		EB8237522970AE6A00FD629E /* WMFItemSourceExcludingActivityTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMFItemSourceExcludingActivityTypes.swift; sourceTree = "<group>"; };
 		FF0261872627B2D800CBD55F /* kcg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kcg; path = kcg.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FF19C1AB260548FD000AC20B /* kcg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kcg; path = kcg.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -7237,6 +7249,7 @@
 		BC45D5471C31E1EA007C72F3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E23A001C2EDB6E4E00B98616 /* DeepLink */,
 				BC45D5561C31EEBE007C72F3 /* Error Handling */,
 				BC45D5591C31EFF8007C72F3 /* i18n */,
 				BC628C791B389E2B00B3F85C /* Images */,
@@ -7607,6 +7620,7 @@
 		BC7C3A381C0FF9620057F023 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				E23A00262EDB74A900B98616 /* DeepLink Tests */,
 				6714D6C9245A2B6A00CE5A4A /* Manual Tests */,
 				BCA6764F1AC05FE200A16160 /* Utilities */,
 				BCD67E7D1C1F12F2005179E1 /* Tests */,
@@ -7786,6 +7800,7 @@
 		BCD67E7D1C1F12F2005179E1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E23A00252EDB705100B98616 /* DeepLink Tests */,
 				67E6532A2BEC1DF40024F699 /* Wikitext Tests */,
 				67F73384273C1FA200D7D713 /* Notifications Tests */,
 				671DF9D625F2B57B0011799E /* Article Description Tests */,
@@ -8621,6 +8636,31 @@
 				6734F051227B634900BDDB94 /* ActionButton.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		E23A001C2EDB6E4E00B98616 /* DeepLink */ = {
+			isa = PBXGroup;
+			children = (
+				E23A00212EDB6E7A00B98616 /* DeepLinkEventHandler.swift */,
+				E23A001D2EDB6E5B00B98616 /* WikipediaDeepLinkHandler.swift */,
+			);
+			path = DeepLink;
+			sourceTree = "<group>";
+		};
+		E23A00252EDB705100B98616 /* DeepLink Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "DeepLink Tests";
+			sourceTree = "<group>";
+		};
+		E23A00262EDB74A900B98616 /* DeepLink Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E23A00272EDB74D600B98616 /* WikipediaDeepLinkHandlerTest.swift */,
+				E23A00302EDB9F6200B98616 /* DeepLinkEventHandlerTest.swift */,
+			);
+			path = "DeepLink Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -9901,12 +9941,14 @@
 				B01662B31D1B8CAB006F4544 /* NSURL+WMFQueryParametersTests.m in Sources */,
 				67F73386273C1FBA00D7D713 /* NotificationServiceHelperTests.swift in Sources */,
 				67C6F75027E293C700B9C864 /* NotificationsCenterViewModelTests.swift in Sources */,
+				E23A00282EDB74D600B98616 /* WikipediaDeepLinkHandlerTest.swift in Sources */,
 				67DAEDEB27E8FB63005CF9B6 /* NotificationsCenterDetailViewModelUserRightsChangeTests.swift in Sources */,
 				D8D550811DF0D2BD00B90177 /* NSArray+WMFMatching.m in Sources */,
 				8330533323F0388E00123141 /* DataStoreTests.swift in Sources */,
 				00D280FC247F019C006BEE23 /* Date+ExtensionTests.swift in Sources */,
 				B0E8088F1C0D16140065EBC0 /* WMFAsyncTestCase.m in Sources */,
 				B0E8087D1C0D15760065EBC0 /* WMFRandomFileUtilities.m in Sources */,
+				E23A00312EDB9F6200B98616 /* DeepLinkEventHandlerTest.swift in Sources */,
 				BC90DE791C57C5AD007E0E81 /* WMFWelcomeLanguageViewControllerVisualTests.m in Sources */,
 				B0E809551C0D1B510065EBC0 /* CLLocation+WMFBearingTests.m in Sources */,
 				004281BF25E6EFC4004945B3 /* NSRegularExpression+Matcheable.m in Sources */,
@@ -10137,6 +10179,7 @@
 				00EACEC628E39D470054DDB4 /* TalkPageEmptyView.swift in Sources */,
 				B0016CC321362DB300FA1096 /* SetupGradientView.swift in Sources */,
 				0042812925E6E841004945B3 /* NYTPhotoViewController.m in Sources */,
+				E23A00222EDB6E7B00B98616 /* DeepLinkEventHandler.swift in Sources */,
 				BC23E4DD1C223DCB00B5AFDE /* WMFArticleRevisionFetcher.m in Sources */,
 				00E75B6727EB927B00A45B78 /* NotificationsCenterDetailActionCell.swift in Sources */,
 				B0B4CF0A1CC0500E0051DF7A /* WMFArticleLanguagesSectionHeader.m in Sources */,
@@ -10391,6 +10434,7 @@
 				6782DBC12343FDCA003FA21B /* DiffListChangeCell.swift in Sources */,
 				00AA5AA7276BF29E005295B0 /* StatusTextBarButtonItem.swift in Sources */,
 				67D9D1F02970D88E00BFCD4F /* DisclosureButton.swift in Sources */,
+				E23A00202EDB6E5E00B98616 /* WikipediaDeepLinkHandler.swift in Sources */,
 				B04C444B1E56966B00C6DFB0 /* Array<UITextField>+WMFAllFieldsFilled.swift in Sources */,
 				D8940CEF1DB56C8A00E17F9E /* NewsViewController.swift in Sources */,
 				D84F2BFC1D2FEE6300963D42 /* WMFRandomDiceButton.m in Sources */,
@@ -10415,7 +10459,6 @@
 				678D79E4235E592F006161FF /* DiffListChangeItemViewModel.swift in Sources */,
 				B0BCF0AB2023AC7700986F72 /* ScrollableEducationPanelViewController.swift in Sources */,
 				67165C602ECFD3EB0078098D /* DatabasePopulationViewModel.swift in Sources */,
-				37C4A98D2DB95FE000AD7141 /* WMFActivityTabExperimentOldViewController.swift in Sources */,
 				7AB209F922FC67B4006FECB4 /* PageHistoryViewController.swift in Sources */,
 				B0E804DA1C0CE0B40065EBC0 /* NSString+FormattedAttributedString.m in Sources */,
 				B01CFC5F1E70B00100B3546A /* WMFDeleteBackwardReportingTextField.swift in Sources */,
@@ -11271,6 +11314,7 @@
 				675175DE276D3B9700CD2974 /* DisappearingCallbackNavigationController.swift in Sources */,
 				D8CE25AD1E698E2400DAE2E0 /* ArticlePlace.swift in Sources */,
 				D8CE25AF1E698E2400DAE2E0 /* WMFSearchResults.m in Sources */,
+				E23A00232EDB6E7B00B98616 /* DeepLinkEventHandler.swift in Sources */,
 				83DE45BA2449C09B00671878 /* SplashScreenViewController.swift in Sources */,
 				00E2EA9026E2A45C00B1A741 /* NotificationsCenterCellDisplayState.swift in Sources */,
 				6761AEE32704DE4100E47BAD /* NotificationsCenterCellViewModel+TextExtensions.swift in Sources */,
@@ -11427,6 +11471,7 @@
 				6782DBA42343B7EE003FA21B /* DiffHeaderSummaryView.swift in Sources */,
 				D8CE25FF1E698E2400DAE2E0 /* ArticlePlaceView.swift in Sources */,
 				7A70797E223AB69000A2BDFC /* WelcomePanelLabelContentViewController.swift in Sources */,
+				E23A001E2EDB6E5E00B98616 /* WikipediaDeepLinkHandler.swift in Sources */,
 				005E004328DE1F2800721584 /* TalkPageCoffeeRollViewModel.swift in Sources */,
 				D8CE26001E698E2400DAE2E0 /* WMFCaptchaViewController.swift in Sources */,
 				D8CE26011E698E2400DAE2E0 /* DDLog+WMFLogger.m in Sources */,
@@ -11830,6 +11875,7 @@
 				675175DD276D3B9700CD2974 /* DisappearingCallbackNavigationController.swift in Sources */,
 				D8EC3EAA1E9BDA35006712EB /* ArticlePlace.swift in Sources */,
 				D8EC3EAC1E9BDA35006712EB /* WMFSearchResults.m in Sources */,
+				E23A00242EDB6E7B00B98616 /* DeepLinkEventHandler.swift in Sources */,
 				83DE45BB2449C09B00671878 /* SplashScreenViewController.swift in Sources */,
 				00E2EA8F26E2A45C00B1A741 /* NotificationsCenterCellDisplayState.swift in Sources */,
 				6761AEE22704DE4100E47BAD /* NotificationsCenterCellViewModel+TextExtensions.swift in Sources */,
@@ -11986,6 +12032,7 @@
 				83F1096123D09F80003F3E9E /* ArticleViewController+Tooltips.swift in Sources */,
 				6782DBA52343B7EE003FA21B /* DiffHeaderSummaryView.swift in Sources */,
 				D8EC3F001E9BDA35006712EB /* DDLog+WMFLogger.m in Sources */,
+				E23A001F2EDB6E5E00B98616 /* WikipediaDeepLinkHandler.swift in Sources */,
 				7A70797F223AB69000A2BDFC /* WelcomePanelLabelContentViewController.swift in Sources */,
 				005E004228DE1F2800721584 /* TalkPageCoffeeRollViewModel.swift in Sources */,
 				D80ED25E1EE18D0900CE8C50 /* PlacesSearchSuggestionTableViewCell.swift in Sources */,

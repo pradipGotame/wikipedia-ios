@@ -2,11 +2,16 @@ import WMFComponents
 import WMFData
 import WMF
 import CocoaLumberjackSwift
+import Combine
 
 import MapKit
 
 @objc(WMFPlacesViewController)
 class PlacesViewController: ArticleLocationCollectionViewController, UISearchBarDelegate, ArticlePopoverViewControllerDelegate, PlaceSearchSuggestionControllerDelegate, NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate, ArticlePlaceViewDelegate, UIGestureRecognizerDelegate {
+    
+    ///cancellables for deeplink observer
+    private var cancellables = Set<AnyCancellable>()
+    ///end
 
     fileprivate var mapView: MapView!
 
@@ -27,6 +32,9 @@ class PlacesViewController: ArticleLocationCollectionViewController, UISearchBar
     var listViewController: ArticleLocationCollectionViewController!
     @IBOutlet weak var searchSuggestionView: UITableView!
     @IBOutlet var emptySearchOverlayView: PlaceSearchEmptySearchOverlayView!
+    
+    ///loading indicator
+    private var loadingIndicator = UIActivityIndicatorView(style: .large)
 
     fileprivate var wikidataFetcher: WikidataFetcher!
     fileprivate let locationSearchFetcher = WMFLocationSearchFetcher()
@@ -167,6 +175,9 @@ class PlacesViewController: ArticleLocationCollectionViewController, UISearchBar
         searchSuggestionController = PlaceSearchSuggestionController()
         searchSuggestionController.tableView = searchSuggestionView
         searchSuggestionController.delegate = self
+        
+        // Loading Indicator
+        addLoadingIndicator()
 
         super.viewDidLoad()
 
@@ -183,6 +194,8 @@ class PlacesViewController: ArticleLocationCollectionViewController, UISearchBar
         panGR.delegate = self
         view.addGestureRecognizer(panGR)
         overlaySliderPanGestureRecognizer = panGR
+        
+        observeDeepLink() ///deeplink observer
 
         self.view.layoutIfNeeded()
     }
@@ -2600,5 +2613,50 @@ extension PlacesViewController: LogoutCoordinatorDelegate {
 extension PlacesViewController: YearInReviewBadgeDelegate {
     func updateYIRBadgeVisibility() {
         updateProfileButton()
+    }
+}
+
+// MARK: observer for deeplink
+extension PlacesViewController {
+    func observeDeepLink() {
+        DeepLinkEventHandler.shared.deepLinkSubject
+            .sink { [weak self] deepLink in
+                guard let self = self else { return }
+                
+                self.animateLoading(with: true)
+                defer {
+                    self.animateLoading(with: false)
+                }
+                
+                self.currentSearch = PlaceSearch(
+                    filter: .top,
+                    type: .text,
+                    origin: .user,
+                    sortStyle: .links,
+                    string: nil,
+                    region: deepLink.region,
+                    localizedDescription: deepLink.name,
+                    searchResult: nil
+                )
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func addLoadingIndicator() {
+        loadingIndicator.frame = CGRect(x: -120, y: 0, width: 40, height: 40)
+        loadingIndicator.center = view.center
+        self.view.addSubview(loadingIndicator)
+        self.view.bringSubviewToFront(loadingIndicator)
+    }
+    
+    private func animateLoading(with flag: Bool) {
+        if flag {
+            loadingIndicator.startAnimating()
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let self = self else { return }
+                self.loadingIndicator.stopAnimating()
+            }
+        }
     }
 }
