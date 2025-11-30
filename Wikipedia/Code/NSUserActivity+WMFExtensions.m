@@ -5,6 +5,8 @@
 @import MobileCoreServices;
 
 NSString *const WMFNavigateToActivityNotification = @"WMFNavigateToActivityNotification";
+NSString *const WMFPlacesDeeplinkLatKey = @"lat";
+NSString *const WMFPlacesDeeplinkLongKey = @"lon";
 
 // Use to suppress "User-facing text should use localized string macro" Analyzer warning
 // where appropriate.
@@ -62,15 +64,42 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
 + (instancetype)wmf_placesActivityWithURL:(NSURL *)activityURL {
     NSURLComponents *components = [NSURLComponents componentsWithURL:activityURL resolvingAgainstBaseURL:NO];
     NSURL *articleURL = nil;
+    NSNumber *lat = nil;
+    NSNumber *lon = nil;
+    NSString *title = nil;
+    
     for (NSURLQueryItem *item in components.queryItems) {
+        
+        ///only article url is handled
         if ([item.name isEqualToString:@"WMFArticleURL"]) {
             NSString *articleURLString = item.value;
             articleURL = [NSURL URLWithString:articleURLString];
+            
             break;
         }
+        
+        ///adding condition to handle deeplink url
+        if ([item.name isEqualToString:WMFPlacesDeeplinkLatKey]) {
+            lat = @(item.value.doubleValue);
+            continue;
+        }
+        
+        if ([item.name isEqualToString:WMFPlacesDeeplinkLongKey]) {
+            lon = @(item.value.doubleValue);
+            continue;
+        }
     }
+    
     NSUserActivity *activity = [self wmf_pageActivityWithName:@"Places"];
     activity.webpageURL = articleURL;
+    
+    //Now add to info entries
+    if (lat != nil && lon != nil) {
+        [activity addUserInfoEntriesFromDictionary: @{
+            WMFPlacesDeeplinkLatKey: lat,
+            WMFPlacesDeeplinkLongKey: lon
+        }];
+    }
     return activity;
 }
 
@@ -318,6 +347,10 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
         components.queryItems = @[item];
     }
     return components.URL;
+}
+
++ (NSURLComponents *) wmf_deepLinkItemForActivityOfType:(WMFUserActivityType)type {
+    return [self wmf_baseURLComponentsForActivityOfType:type];
 }
 
 @end

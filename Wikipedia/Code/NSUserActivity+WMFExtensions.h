@@ -17,6 +17,9 @@ typedef NS_ENUM(NSUInteger, WMFUserActivityType) {
 
 extern NSString *const WMFNavigateToActivityNotification;
 
+extern NSString *const WMFPlacesDeeplinkLatKey;
+extern NSString *const WMFPlacesDeeplinkLongKey;
+
 @interface NSUserActivity (WMFExtensions)
 
 + (void)wmf_navigateToActivity:(NSUserActivity *)activity;

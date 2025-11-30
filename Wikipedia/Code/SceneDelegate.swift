@@ -145,10 +145,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return
             }
             
-            defer {
-                navigateToPlace(with: firstURL)
-            }
-            
             if appNeedsResume {
                 resumeAppIfNecessary()
             } else {
@@ -171,21 +167,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if appNeedsResume {
             appViewController?.hideSplashScreenAndResumeApp()
             appNeedsResume = false
-        }
-    }
-    
-    private func navigateToPlace(with url: URL) {
-        //MARK: - for places
-        let target =  WikipediaDeepLinkHandler.parse(url)
-        switch target {
-        case .places(let mKCoordinateRegion, let name):
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                DeepLinkEventHandler.shared.deepLinkSubject.send(
-                    DeepLinkParameters(region: mKCoordinateRegion, name: name)
-                )
-            }
-        case .unknown: print("unknown host")
-            
         }
     }
     

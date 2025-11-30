@@ -52,5 +52,28 @@
                           @"https://en.wikipedia.org/w/index.php?search=dog&title=Special:Search&fulltext=1");
 }
 
+- (void)testIfDeepLinkIsPlace {
+    NSString *stringURL = @"wikipedia://places?lat=123&lon=456";
+    NSURL *URL = [NSURL URLWithString:stringURL];
+    
+    NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:URL];
+    XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
+}
+
+- (void)testPlaceDeepLinkCoordinator {
+    NSNumber *expectedLat = @123;
+    NSNumber *expectedLon = @456;
+    
+    NSString *stringURL = [NSString stringWithFormat:@"wikipedia://places?lat=%@&lon=%@", expectedLat, expectedLon];
+    NSURL *URL = [NSURL URLWithString:stringURL];
+    
+    NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:URL];
+    NSNumber *lat = activity.userInfo[@"lat"];
+    NSNumber *lon = activity.userInfo[@"lon"];
+    
+    XCTAssertTrue([lat isEqualToNumber:expectedLat]);
+    XCTAssertTrue([lon isEqualToNumber:expectedLon]);
+}
+
 @end
 
